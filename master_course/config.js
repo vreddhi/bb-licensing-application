@@ -1,0 +1,1 @@
+var bridgeURL = 'https://tripletech.biz/license_tracking2/services/userTracking.php'; var completionApi = 'https://tripletech.biz/license_tracking2/services/setCompletion.php'; var feedbackApi = 'https://tripletech.biz/license_tracking2/services/setFeedback.php';
