@@ -1,0 +1,169 @@
+
+<div ng-init="init();">
+ <h3><span>Trial Course creation</span></h3>
+   <br/>
+   
+   
+ <form class="form-horizontal">
+ 
+ <div  ng-hide="showSelected">
+ <div class="form-group form-inline  col-sm-12 col-md-12 col-lg-12">
+    <label class="control-label" for="name">Select Client:</label>
+	 <select class="form-control" ng-model="clientId" ng-options="client.clientId as client.clientName for client in clients">
+		<option value="">Please Select a Client</option>
+		<!--<option value="2013">Client 2</option>
+		<option value="2016">Client 3</option>-->
+	</select>
+	</div>
+	 <div class="form-group form-inline  col-sm-12 col-md-12 col-lg-12">
+		<button type="button" class="btn btn-primary" ng-click="ViewAssignedCourse(clientId)">
+			<span class="glyphicon"></span> View Assigned Trial courses
+		</button>
+
+		 <button type="button" class="btn btn-primary" ng-click="getCourseList(clientId)">
+			<span class="glyphicon glyphicon-plus"></span>Assign New Trial courses
+		</button>
+	</div>	
+
+  </div>
+  
+  
+   <div class="form-group form-inline"  ng-show="showAssignedCourse">
+		
+		<div class="gridContainer" style="width: 100%;" >
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					  <th style="width: 30%;">Course Name</th>
+					  <th style="width: 10%;">License count</th>
+					  <th style="width: 50%;">Download Path</th>
+					  <th style="width: 10%;">Manage</th>
+					</tr>
+				</thead>
+				<tr ng-repeat='course in assignedCourses'>
+					<td>{{course.courseName}}</td>
+					<td>{{course.expiryDate}}</td>
+					<td><a href="{{course.downloadPath}}">{{course.downloadPath}}</a></td>					
+					<td>&nbsp;&nbsp;&nbsp;<a ng-click="fnEdit(course.trialId)"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;&nbsp; <a ng-click="fnDeactivate(course.trialId)"><span class="glyphicon glyphicon-trash"></span></a></a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+   <div class="form-group form-inline"  ng-show="showCourse">
+		<label class="control-label col-sm-2" for="name">Select Courses:</label><br/><br/>
+		<div class="acidjs-css3-treeview">
+	
+		<ul>
+			<li ng-repeat="courseList in finalObj.courses">
+				<input type="checkbox" id="node-0" checked="checked" /><label><input type="checkbox" /><span ng-click="selectChildren(courseList);"></span></label><label for="node-0">{{courseList.familyName}}</label>
+				<ul>
+					<li ng-repeat="course in courseList.courses">
+						<input type="checkbox" id="node-0-0" checked="checked" /><label><input type="checkbox" value="{{course.courseId}}" ng-model="course.selected"/><span></span></label><label for="node-0-0">{{course.courseName}}</label>
+					   
+					</li>
+					
+				</ul>
+			</li>
+			
+			
+		</ul>
+	</div>
+	<div class="form-group form-inline">
+		<label  class="control-label col-sm-2" for="startDate"></label>
+		<button type="submit" class="btn btn-primary" ng-click="submitForm();">Submit</button>
+		<button type="submit" class="btn btn-primary" ng-click="Cancel_Selection();">Cancel</button>
+	</div>
+	</div>
+	
+</div>
+  
+	
+	<div  ng-show="showSelected && !showDownload">
+		<div class="gridContainer" style="width: 40%;" >
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					  <th style="width: 50%;">Course Name</th>
+					  <th style="width: 50%;">Expiry Date</th>
+					 
+					</tr>
+				</thead>
+				<tr ng-repeat='course in selectedCourses'>				
+					<td>{{course.courseName}}</td>
+					<td> 
+						<div class='input-group date col-sm-12 endDate' datetimepicker ng-model="course.expiryDate">
+							<input type='text' class="form-control" ng-model="course.expiryDate"/>
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</td>
+					<script>
+					 $(function () {                
+						$('.endDate').datetimepicker({ viewMode: 'days',format: 'MM/DD/YYYY'});
+					});
+				</script>	
+			</tr>
+			</table>
+		</div>
+
+		<div class="form-group form-inline">
+			<label  class="control-label col-sm-2" for="startDate"></label>
+			<button type="submit" class="btn btn-primary" ng-click="showdownload();">Submit</button>
+			<button type="submit" class="btn btn-primary" ng-click="Cancel_License();">Cancel</button>
+		</div>
+	</div>
+	
+	<div ng-show="showDownload">
+		<div class="gridContainer" style="width: 100%;" >
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					  <th style="width: 40%;">Course Name</th>
+					  <th style="width: 10%;">Expiry Date</th>
+					  <th style="width: 50%;">Zip path</th>
+					</tr>
+				</thead>
+				<tr ng-repeat='course in selectedCourses'>
+					<td>{{course.courseName}}</td>
+					<td>{{course.expiryDate}}</td>
+					<td><a href="{{course.zipPath}}">{{course.zipPath}}</a></td>
+					
+					
+			</tr>
+			</table>
+		</div>
+	
+		<div class="form-group form-inline">
+			<label  class="control-label col-sm-2" for="startDate"></label>
+			<button type="submit" class="btn btn-primary" ng-click="submitForm();">Send to Mail</button>
+		
+		</div>
+	</div>
+	
+</form>
+
+
+ <script>
+	 $(function () {
+                
+		$('.endDate').datetimepicker({ viewMode: 'days',format: 'MM/DD/YYYY'});
+	});
+	$(".acidjs-css3-treeview").delegate("label input:checkbox", "change", function() {
+		
+		var
+			checkbox = $(this),
+			nestedList = checkbox.parent().next().next(),
+			selectNestedListCheckbox = nestedList.find("label:not([for]) input:checkbox");
+		
+		if(checkbox.is(":checked")) {
+			return selectNestedListCheckbox.prop("checked", true);
+		}
+		selectNestedListCheckbox.prop("checked", false);
+	});
+</script>
+		
+		
+</div>
+ 

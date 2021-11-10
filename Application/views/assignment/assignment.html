@@ -1,0 +1,194 @@
+<style>
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		font-weight: normal;
+		font-size: 12px;
+	}
+</style>
+<div ng-init="init();">
+ <h3><span>Course Assignment</span></h3>
+   <br/>
+   
+   
+ <form class="form-horizontal">
+ 
+
+		
+ <div  ng-hide="showSelected">
+  <div class="form-group form-inline  col-sm-12 col-md-12 col-lg-12">
+    <label class="control-label" for="name">Select Client:</label>
+	 <select class="form-control" ng-model="clientId" ng-options="client.clientId as client.clientName for client in clients">
+		<option value="">Please Select a Client</option>
+		<!--<option value="2013">Client 2</option>
+		<option value="2016">Client 3</option>-->
+	</select>
+	</div>
+	 <div class="form-group form-inline  col-sm-12 col-md-12 col-lg-12">
+		<button type="button" class="btn btn-primary" ng-click="ViewAssignedCourse(clientId)">
+			<span class="glyphicon"></span> View Assigned Courses
+		</button>
+
+		 <button type="button" class="btn btn-primary" ng-click="getCourseList(clientId)">
+			<span class="glyphicon glyphicon-plus"></span>Assign New Courses
+		</button>
+	</div>	
+
+  </div>
+  
+  <div class="form-group form-inline"  ng-show="showAssignedCourse">
+		
+		<div class="gridContainer" style="width: 100%;" >
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					<th style="width:5%;">Sno</th>
+					  <th style="width: 25%;">Course Name</th>
+					  <th style="width: 5%;">License count</th>
+					  <th style="width: 50%;">Download Path</th>
+					  <th style="width: 15%;">Manage</th>
+					</tr>
+				</thead>
+				<tr ng-repeat='course in assignedCourses track by $index'>
+					<td>{{$index + 1}}</td>
+					<td>{{course.courseName}}</td>
+					<td>{{course.licenseCount}}</td>
+					<td><a href="{{course.downloadPath}}">{{course.downloadPath}}</a></td>					
+					<td>&nbsp;&nbsp;&nbsp;<a ng-click="fnEdit(course.assignId)"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;&nbsp; <a ng-click="fnDeactivate(course.assignId)"><span class="glyphicon glyphicon-trash"></span></a></a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+   <div class="form-horizontal"  ng-show="showCourse">
+		
+	
+		<div class="form-group form-inline col-sm-12">
+			<label class="control-label col-sm-2"  for="Lname">Full library:</label>
+			<input type="checkbox" name="fulllibrary" ng-click="selectAllChildren();"/>
+		</div><br/><br/>
+
+		<div class="form-group form-inline col-sm-12">
+			<label class="control-label col-sm-2"  for="Lname">SCORM version:</label>
+				<input type="radio" ng-model="scormVersion" value="scorm12">SCORM 1.2 <br/>
+				<input type="radio" ng-model="scormVersion" value="scorm2004">SCORM 2004
+			  
+		</div><br/><br/>
+
+		<div class="form-group form-inline col-sm-12">
+			<label class="control-label col-sm-2"  for="Lname">License count:</label>
+			<input type="text" class="form-control" id="courseName" ng-model="licenseCount">
+		</div><br/><br/>
+		<div class="form-group form-inline col-sm-12">
+			<label class="control-label col-sm-2"  for="Lname">Select Courses Type:</label>
+			<select class="form-control" ng-model="courseType" ng-options="courseType.typeId as courseType.typeName for courseType in courseTypes">
+				<option value="">Please select a Course Type</option>
+			</select>
+		</div><br/><br/>
+		
+		<label class="control-label col-sm-12" for="name">Select Courses:</label><br/><br/>
+		<div class="acidjs-css3-treeview">
+	
+		<ul>
+			<li ng-repeat="courseList in finalObj.courses">
+				<input type="checkbox" id="node-0" checked="checked" /><label><input type="checkbox" /><span ng-click="selectChildren(courseList);"></span></label><label for="node-0">{{courseList.familyName}}</label>
+				<ul>
+					<li ng-repeat="course in courseList.courses">
+						<input type="checkbox" id="node-0-0" checked="checked" /><label><input type="checkbox" value="{{course.courseId}}" ng-model="course.selected"/><span></span></label><label for="node-0-0">{{course.courseName}}</label>
+					   
+					</li>
+					
+				</ul>
+			</li>
+			
+			
+		</ul>
+	</div>
+	<br/><br/><br/><br/>
+	<div class="form-group form-inline">
+		<label  class="control-label col-sm-2" for="startDate"></label>
+		<button type="submit" class="btn btn-primary" ng-click="submitForm();">Submit</button>
+		<button type="submit" class="btn btn-primary" ng-click="Cancel_Selection();">Cancel</button>
+	</div>
+	</div>
+	
+</div>
+  
+
+	<!--<div  ng-show="showSelected && !showDownload">
+		<div class="gridContainer" style="width: 40%;" >
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+					  <th style="width: 75%;">Course Name</th>
+					  <th style="width: 25%;">License count</th>
+					 
+					</tr>
+				</thead>
+				<tr ng-repeat='course in selectedCourses'>
+					<td>{{course.courseName}}</td>
+					<td>  <input type="text" class="form-control" id="courseName" ng-model="course.count"></td>
+					
+					
+			</tr>
+			</table>
+		</div>
+	
+		<div class="form-group form-inline">
+			<label  class="control-label col-sm-2" for="startDate"></label>
+			<button type="submit" class="btn btn-primary" ng-click="showdownload();">Submit</button>
+			<button type="submit" class="btn btn-primary" ng-click="Cancel_License();">Cancel</button>
+		</div>
+	</div>
+-->
+	<div ng-show="showDownload">
+		<div class="gridContainer" style="width: 40%;" >
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						 <th style="width: 25%;">Sno</th>
+					  <th style="width: 25%;">Course Name</th>
+					  <th style="width: 25%;">License count</th>
+					  <th style="width: 50%;">Download Path</th>
+					</tr>
+				</thead>
+				<tr ng-repeat='course in selectedCourses track by $index'>
+					<td>{{$index + 1}}</td>
+					<td>{{course.courseName}}</td>
+					<td>{{course.count}}</td>
+					<td><a href="{{course.zipPath}}">{{course.zipPath}}</a></td>
+					
+					
+			</tr>
+			</table>
+		</div>
+	
+		<div class="form-group form-inline">
+			<label  class="control-label col-sm-2" for="startDate"></label>
+			<!--<button type="submit" class="btn btn-primary" ng-click="submitForm();">Send to Mail</button>-->
+		
+		</div>
+	</div>
+	
+</form>
+
+<div class="alert alert-success col-sm-6" id="messagebox" ng-show='showMsgBox'>
+  <strong>Course has been added successfully!</strong> 
+</div>
+ <script>
+        $(".acidjs-css3-treeview").delegate("label input:checkbox", "change", function() {
+			
+            var
+                checkbox = $(this),
+                nestedList = checkbox.parent().next().next(),
+                selectNestedListCheckbox = nestedList.find("label:not([for]) input:checkbox");
+            
+            if(checkbox.is(":checked")) {
+                return selectNestedListCheckbox.prop("checked", true);
+            }
+            selectNestedListCheckbox.prop("checked", false);
+        });
+        </script>
+</div>
+ 

@@ -1,0 +1,50 @@
+
+<div ng-init="init();">
+ <h3><span>Edit Course Assignment</span></h3>
+   <br/>
+   
+  
+ <form class="form-horizontal">
+	<div>
+		<div class="gridContainer" style="width: 40%;" >
+			<table class="table table-bordered">				
+				<tr>
+					<td>Course Name</td>
+					<td>{{assignment.courseName}}</td>
+								
+				</tr>
+				<tr>
+					<td>License Count</td>
+					<td>  <input type="text" class="form-control" id="courseName" ng-model="assignment.licenseCount"></td>	
+								
+				</tr>
+				<tr>
+					<td>Courses Type:</td>
+					<td> 
+						<select class="form-control" ng-model="assignment.courseTypeId" ng-options="courseType.typeId as courseType.typeName for courseType in courseTypes">
+							<option value="">Please select a Course Type</option>
+						</select>
+
+					</td>	
+								
+				</tr>
+			</table>
+		</div>
+	
+		<div class="form-group form-inline">
+			<label  class="control-label col-sm-2" for="startDate"></label>
+			<button type="submit" class="btn btn-primary" ng-click="updateAssignment(assignment);">Submit</button>
+			<button type="submit" class="btn btn-primary" ng-click="Back();">Back</button>
+		</div>
+	</div>
+	
+	
+	
+</form>
+
+<div class="alert alert-success col-sm-6" id="messagebox" ng-show='showMsgBox'>
+  <strong>Course has been added successfully!</strong> 
+</div>
+ 
+</div>
+ 

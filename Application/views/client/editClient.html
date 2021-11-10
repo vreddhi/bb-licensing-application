@@ -1,0 +1,58 @@
+
+<div ng-init="init()">
+ <h3><span>Edit Client</span></h3>
+   <br/>
+   
+ <form class="form-horizontal">
+ 
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2" for="name">Client Name:</label>
+	<input type="text" class="form-control" id="name" ng-model="client.clientName">
+	
+  </div>
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2"  for="Lname">License Name:</label>
+    <input type="text" class="form-control" id="lname" ng-model="client.licenseName">
+  </div>
+  <div class="form-group form-inline">
+    <label class="control-label col-sm-2"  for="email">Email address:</label>
+    <input type="text" class="form-control" id="email" ng-model="client.emailId">
+  </div>
+   <div class="form-group form-inline">
+    <label  class="control-label col-sm-2" for="startDate">Contract Start Date:</label>
+     <div class='input-group date col-sm-2' datetimepicker id='startDate' ng-model="client.startDate">
+		<input type='text' class="form-control" />
+		<span class="input-group-addon">
+			<span class="glyphicon glyphicon-calendar"></span>
+		</span>
+	</div>
+  </div>
+   <div class="form-group form-inline">
+    <label  class="control-label col-sm-2" for="endDate">Contract End Date:</label>
+	<div class='input-group date col-sm-2' datetimepicker id='endDate' ng-model="client.endDate">
+		<input type='text' class="form-control" />
+		<span class="input-group-addon">
+			<span class="glyphicon glyphicon-calendar"></span>
+		</span>
+	</div>
+  </div>
+  <div class="form-group form-inline">
+    <label  class="control-label col-sm-2" for="startDate"></label>
+    <button type="submit" class="btn btn-primary" ng-click="submitForm(client);">Submit</button>
+	 <button type="submit" class="btn btn-primary" ng-click="Back();">Back</button>
+	</div>
+  
+</form>
+
+<div class="alert alert-success col-sm-6" id="messagebox" ng-show='showMsgBox'>
+  <strong>Client has been added successfully!</strong> 
+</div>
+ <script type="text/javascript">
+            $(function () {
+				
+                $('#startDate').datetimepicker({ viewMode: 'days',format: 'MM/DD/YYYY'});
+				 $('#endDate').datetimepicker({ viewMode: 'days',format: 'MM/DD/YYYY'});
+            });
+        </script>
+</div>
+ 

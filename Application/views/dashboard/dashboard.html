@@ -1,0 +1,112 @@
+
+<div ng-init="init()">
+ <h3><span>Dashboard</span></h3>
+   <br/>
+	<div class="tiles">
+	   <div class="tile bg-emerald" ng-click="fnClient();">
+			<span class='icon glyphicon glyphicon-user'></span>
+			<div class="title">Client Management</div>
+			
+	   </div>
+	   <div class="tile bg-cobalt" ng-click="fnCourse();">
+			<span class='icon glyphicon glyphicon-book'></span>
+			<div class="title">Course Management</div>
+	   </div>
+	   <div class="tile bg-magenta" ng-click="fnReport();">
+			<span class='icon fa fa-bar-chart'></span>
+			<div class="title">Reports</div>
+	   </div>
+		<div class="tile bg-orange" ng-click="fnAssignment();">
+			<span class='icon glyphicon glyphicon-list-alt'></span>
+			<div class="title">Course Assignment</div>
+		</div>
+		<div class="tile bg-amber" ng-click="fnTrial();">
+			<span class='icon glyphicon glyphicon-tasks'></span>
+			<div class="title">Trial Course Management</div>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-md-6 text-right">
+			<label class="control-label" for="name">TimeLine:</label>
+		</div>
+		<div class="col-md-6">
+			
+			<select  class="form-control" ng-model="timeline" ng-change="fnTimeLineChange();">
+				<option value="30" selected>Last 30 Days</option>
+				<option value="90">Last 90 Days</option>
+				<option value="180">Last 180 Days</option>
+				<option value="365">Last 365 Days</option>
+				<option value="730">Last 2 Years</option>
+				<option value="1095">Last 3 Years</option>
+			</select>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading"> Top Trending Courses</div>
+					<div id="chart2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="row">
+		<div class="col-md-12">   
+        <div class="panel panel-primary">
+            <div class="panel-heading"> Top Active Clients</div>
+                <div class="panel-body">
+                    <!-- <div ui-chart="barChartData" chart-options="barChartOptions"></div>-->
+					<div id="clientChart"></div>
+                </div>
+            </div>
+		</div>
+   
+	</div>
+  </div>
+
+  <div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-primary" style="height:400px;overflow-y:auto;">
+			<div class="panel-heading"> Notifications</div>
+				<div class="panel-body" style='overflow-y: auto;'>   
+					<div class="alert alert-danger" role="alert"  ng-repeat="notify in notifications" ng-if="notify.type == 1">
+					  <strong>Warning!</strong> {{notify.clientName}} license has been expired in {{notify.endDate}}.
+					</div>
+					<div class="alert alert-warning" role="alert"  ng-repeat="notify in notifications" ng-if="notify.type == 2">
+					  <strong>Warning!</strong> {{notify.clientName}} license will be expired in {{notify.endDate}}.
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
+
+  <div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading"> New Users</div>
+					<div id="newUserChart"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading"> New Users (VectorSolution)</div>
+					<div id="newUserVectorChart"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+   
+</div>   
+<style>
+.jqplot-point-label {font-size: 13px; color: #000;} 
+</style>

@@ -1,0 +1,36 @@
+
+<div ng-init="init();">
+ <h3><span>Client Management</span></h3>
+   <br/>
+ <div class="">
+	<button type="button" class="btn btn-primary" ng-click="fnAdd()">
+		<span class="glyphicon glyphicon-plus"></span> Add Client
+	</button>
+</div>
+  <br/>
+<div class="gridContainer" style="width: 80%;">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+			  <th>Name</th>
+			  <th>License Name</th>
+			  <th>Email</th>
+			  <th>Start Date</th>
+			   <th>End Date</th>
+			   <th>Account URL</th>
+			   <th>Manage</th>
+			</tr>
+		  </thead>
+		
+		<tr ng-repeat='user in users'>
+			<td><a ng-click="fnView(user.clientId)">{{user.clientName}}</a></td>
+			<td>{{user.licenseName}}</td>
+			<td>{{user.emailId}}</td>
+			<td>{{user.startDate | date :"MM/dd/yyyy"}}</td>
+			<td>{{user.endDate| date :"MM/dd/yyyy"}}</td>
+			<td><a href="https://tripletech.biz/license_tracking2/services/myaccount.php?YDRKEE5N2={{user.decryptName}}" target='_blank'>https://tripletech.biz/license_tracking2/services/myaccount.php?YDRKEE5N2={{user.decryptName}}</a></td>
+			<td>&nbsp;&nbsp;&nbsp;<a ng-click="fnEdit(user.clientId)"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;&nbsp;&nbsp; <a ng-click="fnDeactivate(user.clientId)"><span class="glyphicon glyphicon-trash"></span></a></a></td>
+		</tr>
+	</table>
+</div>
+</div>

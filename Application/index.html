@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<title>Bigger Brain - License Tracking Application</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link href="./css/prettify-1.0.css" rel="stylesheet">
+<link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="icon" href="https://getbiggerbrains.com/wp-content/uploads/2017/09/favicon1.png" sizes="32x32" />
+<link rel="icon" href="https://getbiggerbrains.com/wp-content/uploads/2017/09/favicon1.png" sizes="192x192" />
+<!-- JS (load angular, ui-router, and our custom js file) -->
+
+<script type="text/javascript" src="js/lib/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+<script src="js/lib/moment-with-locales.js"></script>
+<script src="js/lib/bootstrap-datetimepicker.js"></script>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/angular-ui-router.min.js"></script>
+<script src="js/lib/ui-bootstrap-tpls-0.6.0.js"></script>    
+<script src="js/lib/jquery.jqplot.js" type="text/javascript" charset="utf-8"></script>   
+<script src="js/lib/jqplot.barRenderer.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lib/jqplot.categoryAxisRenderer.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lib/jqplot.pointLabels.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lib/jqplot.categoryAxisRenderer.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lib/jqplot.canvasAxisLabelRenderer.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lib/jqplot.canvasAxisTickRenderer.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/lib/jqplot.canvasTextRenderer.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="js/app.js"></script>
+<script src="js/common/config.js"></script>
+<script src="js/controllers/login/loginController.js"></script>
+<script src="js/controllers/dashboard/dashboardController.js"></script>
+<script src="js/controllers/clients/clientViewController.js"></script>	
+<script src="js/controllers/clients/addClientController.js"></script>
+<script src="js/controllers/clients/editClientController.js"></script>
+<script src="js/controllers/course/courseViewController.js"></script>
+<script src="js/controllers/course/addCourseController.js"></script>		
+<script src="js/controllers/course/editCourseController.js"></script>
+<script src="js/controllers/course/addCourseStructureController.js"></script>
+<script src="js/controllers/assignment/assignmentController.js"></script>
+<script src="js/controllers/assignment/editAssignmentController.js"></script>
+<script src="js/controllers/trial/trialController.js"></script>
+<script src="js/controllers/trial/editTrialController.js"></script>
+<script src="js/controllers/report/courseCompletionReportsController.js"></script>
+<script src="js/controllers/report/feedbackReportsController.js"></script>
+<script src="js/controllers/report/courseAccessReportController.js"></script>
+<script src="js/controllers/report/licenseReportController.js"></script>
+<script src="js/controllers/report/courseTakenReportController.js"></script>
+</head>
+<body ng-app="managementApp">
+
+
+<!-- NAVIGATION -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <img src='images/logo.png'></img>
+    <ul class="nav navbar-nav" ng-hide="hideNav">
+		
+        <li><a ui-sref="dashboard">Dashboard</a></li>
+        <li><a ui-sref="client">Client Management</a></li>
+		<li><a ui-sref="course">Course Management</a></li>
+		<li><a ui-sref="reports">Reports</a></li>
+		<li><a ui-sref="assignment">Course Assignment</a></li>
+		<li><a ui-sref="trial">Trial Course Management</a></li>
+		<li><a ui-sref="login">logout</a></li>
+    </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+    <div ui-view></div>
+
+</div>
+ 
+</body>
+</html>

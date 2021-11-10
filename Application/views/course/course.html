@@ -1,0 +1,40 @@
+
+<div ng-init="init();">
+ <h3><span>Course Management</span></h3>
+   <br/>
+ <div class="">
+	<button type="button" class="btn btn-primary" ng-click="fnAdd()">
+		<span class="glyphicon glyphicon-plus"></span> Add Course
+	</button>
+</div>
+  <br/>
+ 
+<div class="gridContainer" style="width: 100%;">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+			 <th>Sno</th>
+			  <th>Course Group</th>
+			  <th>Name</th>
+			  <th>Created Date</th>
+			  <th>Description</th>
+			  <th>Artwork</th>
+			  <th>Youtube Sample</th>
+			   <th>Manage</th>
+			</tr>
+		  </thead>
+		 
+		<tr ng-repeat='course in courses track by $index'>
+			<td width='5%'>{{$index + 1}}</td>
+			<td width='8%'>{{course.familyName}}</td>
+			<td width='16%'><a ng-click="fnView(course.courseId)">{{course.courseName}}</a></td>				
+			<td width='6%'>{{course.createdOn | dateToISO | date :"MM/dd/yyyy"}}</td>
+			<td width='20%'><a href='{{handoutUrl}}/{{course.description}}' download> {{course.description}}</a></td>
+			<td width='20%'><a href='{{handoutUrl}}/{{course.artwork}}' download>{{course.artwork}}</a></td>
+			<td width='15%'><a href='{{course.youtube}}' target='_blank'>{{course.youtube}}</a></td>
+			<td width='10%'>&nbsp;<a ng-click="fnEdit(course.courseId)"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp; <a ng-click="fnEditStructure(course.courseId)"><span class="glyphicon glyphicon-cog"></span></a>&nbsp; <a ng-click="fnDeactivate(course.courseId)"><span class="glyphicon glyphicon-trash"></span></a></td>
+		</tr>
+	</table>
+</div>
+
+</div>

@@ -1,0 +1,55 @@
+
+<div ng-init="init();">
+ <h3><span>Edit Trial Course Assignment</span></h3>
+   <br/>
+   
+  
+ <form class="form-horizontal">
+	<div>
+		<div class="gridContainer" style="width: 40%;" >
+			<table class="table table-bordered">				
+				<tr>
+					<td>Course Name</td>
+					<td>{{trialObj.courseName}}</td>
+								
+				</tr>
+				<tr>
+					<td>Expiry Date</td>
+					<td> 						
+						<div class='input-group date col-sm-12 endDate' id='endDate' datetimepicker ng-model="trialObj.expiryDate">
+							<input type='text' class="form-control" ng-model="trialObj.expiryDate"/>
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</td>	
+								
+				</tr>
+				
+			</table>
+		</div>
+	
+		<div class="form-group form-inline">
+			<label  class="control-label col-sm-2" for="startDate"></label>
+			<button type="submit" class="btn btn-primary" ng-click="updateTrial(trialObj);">Submit</button>
+			<button type="submit" class="btn btn-primary" ng-click="Back();">Back</button>
+		</div>
+	</div>
+	
+	
+	
+</form>
+
+<div class="alert alert-success col-sm-6" id="messagebox" ng-show='showMsgBox'>
+  <strong>Course has been added successfully!</strong> 
+</div>
+ 
+ <script type="text/javascript">
+            $(function () {
+			
+				$('#endDate').datetimepicker({ viewMode: 'days',format: 'MM/DD/YYYY'});
+            });
+        </script>
+		
+</div>
+ 

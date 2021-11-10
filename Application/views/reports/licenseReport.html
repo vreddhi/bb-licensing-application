@@ -1,0 +1,58 @@
+
+<div ng-init="init();">
+    <h3><span>License Report</span></h3>
+    <br/>
+	<div class="form-horizontal">
+        
+        <div class="form-group form-inline col-sm-12">
+			<label class="control-label col-sm-2"  for="Lname">Client:</label>
+			<select class="form-control" ng-model="report.client" ng-options="client.clientId as client.clientName for client in clients">
+				
+			</select>
+		</div><br/><br/>
+	
+		<div class="form-group form-inline col-sm-12">
+			<label class="control-label col-sm-2"  for="Lname">Course:</label>
+			<select class="form-control" ng-model="report.course" ng-options="course.courseId as course.courseName for course in courses">
+				<option value="">-------- ALL ----------</option>
+			</select>
+		</div><br/><br/>
+		
+        <div class="form-group form-inline">
+            <label  class="control-label col-sm-2" for=""></label>
+            <button type="submit" class="btn btn-primary" ng-click="submitForm(report);">Submit</button>
+            <button type="submit" class="btn btn-primary" ng-click="submitForm(report);">Submit</button>
+             <button type="submit" class="btn btn-primary" ng-click="Back();">Back</button>
+            </div>
+    </div>
+
+    <div class="gridContainer" style="width: 80%;" ng-show="result">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                  <th>Sno</th>
+                  <th>Course Name</th>
+                  <th>Used License</th>
+                  <th>Toatl License</th>
+                 
+                </tr>
+              </thead>
+            
+            <tr ng-repeat='comp in completion'>
+                <td>{{$index + 1}}</td>
+                <td>{{comp.courseName}}</td>
+                <td>{{comp.usedCount}}</td>
+                <td>{{comp.licenseCount}}</td>
+                
+            </tr>
+        </table>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        
+        $('#startDate').datetimepicker({ viewMode: 'days',format: 'MM/DD/YYYY'});
+        $('#endDate').datetimepicker({ viewMode: 'days',format: 'MM/DD/YYYY'});
+    });
+</script>
